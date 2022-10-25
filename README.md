@@ -80,11 +80,12 @@ class Discriminator(nn.Module):
         return x
 ```
 
-and can adjust batch size and epochs by editing line 15~16 of train.py
+and can adjust batch size, epochs and learning rate by editing line 15~16 of train.py
 
 ```python
-EPOCH = # num of epoch
-BATCH_SIZE = # size of batch
+EPOCH = # set num of epoch
+BATCH_SIZE = # set size of batch
+LEARNING_RATE = # set learning rate
 ```
 
 In order to understand the performance and loss of each model in the training process, the training process is recorded in the log folder.
