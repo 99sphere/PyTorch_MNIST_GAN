@@ -1,18 +1,17 @@
 import os
-from sqlite3 import Row
 import torch
 import torch.nn as nn
-import torch.optim as optim
 from torch.utils.data import DataLoader
-from torchvision import datasets, transforms, models
+from torchvision import datasets, transforms
 
 from model.GAN import Discriminator, Generator
 from utils.util import AverageMeter
 
 import matplotlib.pyplot as plt
 
-BATCH_SIZE = 32
-EPOCH = 50
+BATCH_SIZE = 256
+EPOCH = 1000
+LEARNING_RATE = 2e-4
 
 images = []
 if __name__ == "__main__":
@@ -33,8 +32,8 @@ if __name__ == "__main__":
     G = Generator().cuda()
     D = Discriminator().cuda()
 
-    optimizer_G = torch.optim.Adam(G.parameters(), lr=2e-4, betas=(0.5, 0.999))
-    optimizer_D = torch.optim.Adam(D.parameters(), lr=2e-4, betas=(0.5, 0.999))
+    optimizer_G = torch.optim.Adam(G.parameters(), lr=LEARNING_RATE, betas=(0.5, 0.999))
+    optimizer_D = torch.optim.Adam(D.parameters(), lr=LEARNING_RATE, betas=(0.5, 0.999))
 
     criterion = nn.BCELoss()
 
@@ -103,9 +102,12 @@ if __name__ == "__main__":
                     G.eval()
                     gen_imgs = G(z)
                     gen_imgs = gen_imgs.view(BATCH_SIZE,1,28,28).cpu().detach().numpy()
-                    fig, axes = plt.subplots(4, 8, figsize=(10, 10))
+                    fig, axes = plt.subplots(16,16,figsize=(10,10), dpi=300)
                     for idx, img in enumerate(gen_imgs):
-                        plt.subplot(4,8,idx+1)
+                        plt.subplot(16,16,idx+1)
                         plt.imshow(img[0], cmap='gray') 
+                        plt.axis('off')
+                    plt.suptitle('Generation Reuslt after '+ str((epoch * len(mnist_train_dataloader) + iter)) +' iterations', fontsize=30)
                     plt.savefig(str("./images/")+str(epoch * len(mnist_train_dataloader) + iter)+" iter result.png")
+                    plt.close()
                     G.train()
