@@ -97,11 +97,12 @@ python utils/log_visualize.py
 If there is an any problem or question, please contact me or leave it in the Issues tab.    
 Welcome!   
 
-## Result for model proposed in "Deep Residual Learning for Image Recognition"
+## Result
 In all experiments, Adam optimizer and BinaryCrossEntropyLoss were used, and lr scheduler was not used.
+The model was trained on a Tesla V100 GPU environment.
 
 ```
-EPOCH = 
+EPOCH = 1000
 BATCH_SIZE = 256
 LEARNING_RATE = 2e-4
 ```
