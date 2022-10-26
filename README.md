@@ -7,7 +7,6 @@
 This is a Pytorch implementation of the GAN model proposed in "Generative Adversarial Nets".  
 The paper is available [here](https://arxiv.org/pdf/1406.2661.pdf).
 
-The full code is available [here](https://arxiv.org/pdf/1406.2661.pdf "here").  
 **The model architecture followed the brief introduction in the paper, and there was no exact description.**
 
 ## Directory Tree
